@@ -14,7 +14,7 @@ public class AirportSecurity{
 	private int avgTraffic;
 	private int avgProhibitedItems;
 	private int travellersCount;
-	private int itemsCount;
+	private int prohibitedItemsCount;
 	private HashMap<String, String> securityData;
 
 	public AirportSecurity(){
@@ -31,7 +31,9 @@ public class AirportSecurity{
 				setTravellersCount();
 				setItemsCount();
 			}
-			day = Integer.parseInt(securityData.get("Day"));		
+			day = Integer.parseInt(securityData.get("Day"));
+			setAvgTraffic();
+			setAvgProhibitedItems();
 		}
 	}
 
@@ -41,15 +43,19 @@ public class AirportSecurity{
 
 	private void setItemsCount(){
 		if (securityData.containsKey("Item")){
-			itemsCount++;
+			String item = securityData.get("Item");
+			if(item.equals("Gun") || item.equals("NailCutter") 
+				|| item.equals("Blade") || item.equals("Knife")){
+				prohibitedItemsCount++;
+			}
 		}
 	}
 
 	private void setAvgTraffic(){
-
+		avgTraffic = travellersCount/day;
 	}
 
 	private void setAvgProhibitedItems(){
-		
+		avgProhibitedItems = prohibitedItemsCount/day;
 	}
 }
