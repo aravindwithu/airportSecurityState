@@ -2,6 +2,7 @@ package airportSecurityState.util;
 
 import airportSecurityState.util.Results;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
 * airportSecurity class.
@@ -24,7 +25,24 @@ public class AirportSecurity{
 	}
 
 	public void tightenOrLoosenSecurity(HashMap<String, String> securityDataIn){
+		securityData = securityDataIn;
+		if (securityData.containsKey("Day")){
+			if(day == Integer.parseInt(securityData.get("Day"))){
+				setTravellersCount();
+				setItemsCount();
+			}
+			day = Integer.parseInt(securityData.get("Day"));		
+		}
+	}
 
+	private void setTravellersCount(){
+		travellersCount++;
+	}
+
+	private void setItemsCount(){
+		if (securityData.containsKey("Item")){
+			itemsCount++;
+		}
 	}
 
 	private void setAvgTraffic(){
