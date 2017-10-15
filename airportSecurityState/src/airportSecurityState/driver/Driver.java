@@ -4,7 +4,9 @@ package airportSecurityState.driver;
 import airportSecurityState.util.Results;
 import airportSecurityState.util.FileProcessor;
 import airportSecurityState.util.MyLogger;
+import airportSecurityState.util.AirportSecurity;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 /**
 * Driver class contains main method.
@@ -24,7 +26,7 @@ public class Driver
 
 	    try{
 	    	// command line validation for input file and output file respectively.
-	    	String inputFile = "", deleteFile = "", output1File = "", output2File = "", output3File = "";
+	    	String inputFile = "",outputFile = "";
 		    if(5 == args.length){// validates given arguments array length to 5.
 		    	if(!args[0].equals("${arg0}")){// validates 1st input file argument value.
 		    		inputFile = args[0];
@@ -33,46 +35,36 @@ public class Driver
 		    		throw new Exception("Please provide input file.");
 		    	}
 
-		    	if(!args[1].equals("${arg1}")){// validates 2nd delete file argument value.
-					deleteFile = args[1];
-		    	}
-		    	else{
-		    		throw new Exception("Please provide output file.");
-		    	}
-
-		    	if(!args[2].equals("${arg2}")){// validates 3rd output1 file argument value.
-					output1File = args[2];
-		    	}
-		    	else{
-		    		throw new Exception("Please provide output file.");
-		    	}
-
-		    	if(!args[3].equals("${arg3}")){// validates 4th output2 file argument value.
-					output2File = args[3];
-		    	}
-		    	else{
-		    		throw new Exception("Please provide output file.");
-		    	}
-
-		    	if(!args[4].equals("${arg4}")){// validates 5th output3 file argument value.
-					output3File = args[4];
+		    	if(!args[1].equals("${arg1}")){// validates 2nd output file argument value.
+					outputFile = args[1];
 		    	}
 		    	else{
 		    		throw new Exception("Please provide output file.");
 		    	}
 		    }
 		    else{
-		    	throw new Exception("Please pass exactly 5 arguments one for input and another for output files.");
+		    	throw new Exception("Please pass exactly 2 arguments one for input and another for output files.");
 		    }
 
 		    // Object intialized for FileProcessor with respective input file.
 			file = new FileProcessor(inputFile);
 			// The input values are read from file and stored treeBuilder object in BST format.
+			
+			AirportSecurity airportSecurity = new AirportSecurity();
 			String line;
 		    while ((line = file.readLine(true)) != null)
 		    {
 		    	// Read line is split into array of string based on '":" charecter.
-		    	String[] lineValues = line.split(":");
+		    	String[] lineArr = line.split(";");
+		    	HashMap<String, String> securityData = new HashMap<>();
+		    	for(String lineTuple : lineArr){
+		    		String[] tuple = lineTuple.split(":");
+		    		if(!tuple[0].equals(null) && !tuple[1].equals(null)){
+		    			securityData.put(tuple[0], tuple[1]);
+		    			
+		    		}
+		    	}
+		    	airportSecurity.tightenOrLoosenSecurity(securityData);
 		    }
 		    // closes the file reader.
 		    file.readLine(false);
@@ -82,7 +74,7 @@ public class Driver
 
 		   	// Object for PrintWriter is intialized with respective output file name and encoding format.
 		   	// To write original Tree to the output file.
-		   	writer = new PrintWriter(output1File, "UTF-8");
+		   	writer = new PrintWriter(outputFile, "UTF-8");
 		    // writeAll method from Results class is called with writer object to write the test case results to the output file.
 		    results.writeAll(writer);
 		    // writer object is closed.

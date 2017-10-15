@@ -1,10 +1,10 @@
 package airportSecurityState.airportStates;
 
 /**
-* AirportStateI interface.
+* LowRisk class.
 * Created for cs542 - Design patterns, Assignment 3.
 * @author Aravind Venkit
 */
-public interface AirportStateI{
-	public void operation(int operationID);
+public class LowRisk{
+	
 }
