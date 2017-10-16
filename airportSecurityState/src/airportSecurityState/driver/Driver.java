@@ -50,7 +50,8 @@ public class Driver
 			file = new FileProcessor(inputFile);
 			// The input values are read from file and stored treeBuilder object in BST format.
 			
-			AirportSecurity airportSecurity = new AirportSecurity();
+			results = new Results();
+			AirportSecurity airportSecurity = new AirportSecurity(results);
 			String line;
 		    while ((line = file.readLine(true)) != null)
 		    {
@@ -67,9 +68,6 @@ public class Driver
 		    }
 		    // closes the file reader.
 		    file.readLine(false);
-
-		    // Object declared for Results class.
-		    results = new Results();
 
 		   	// Object for PrintWriter is intialized with respective output file name and encoding format.
 		   	// To write original Tree to the output file.

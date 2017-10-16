@@ -1,6 +1,5 @@
 package airportSecurityState.airportStates;
 
-import airportSecurityState.util.Results;
 /**
 * ModerateRisk class.
 * Created for cs542 - Design patterns, Assignment 3.
@@ -11,11 +10,17 @@ public class ModerateRisk implements AirportStateI{
 		
 	}
 
-	public void operate(){
-
+	public String operate(){
+		String result = "";
+		result += operate(2) + " ";
+		result += operate(3) + " ";
+		result += operate(5) + " ";
+		result += operate(8) + " ";
+		result += operate(9);
+		return result;
 	}
 
-	private void operate(int operationID){
-		
+	private String operate(int operationID){
+		return Integer.toString(operationID);
 	}
 }

@@ -2,6 +2,7 @@ package airportSecurityState.airportStates;
 
 import java.util.HashMap;
 import java.util.Map;
+import airportSecurityState.util.Results;
 
 /**
 * airportSecurity class.
@@ -18,12 +19,14 @@ public class AirportSecurity{
 	private AirportStateI moderateRisk;
 	private AirportStateI lowRisk;
 	private HashMap<String, String> securityData;
+	private Results results;
 
-	public AirportSecurity(){
+	public AirportSecurity(Results resultsIn){
 		day = 0;
 		avgTraffic = 0;
 		avgProhibitedItems = 0;
 		travellersCount = 0;
+		results = resultsIn;
 	}
 
 	public void tightenOrLoosenSecurity(HashMap<String, String> securityDataIn){
@@ -63,17 +66,18 @@ public class AirportSecurity{
 	}
 
 	private void setAirportState(){
+		//System.out.println("day: " + day + " avgTraffic: "+ avgTraffic + " avgProhibitedItems: " + avgProhibitedItems);
 		if((avgTraffic > 8)||(avgProhibitedItems >= 2)){
 			highRisk = new HighRisk();
-			highRisk.operate();
+			results.storeNewResult(highRisk.operate());
 		}
 		else if((4 <= avgTraffic && avgTraffic >= 8)||(1 <= avgProhibitedItems && avgProhibitedItems < 2)){
 			moderateRisk = new ModerateRisk();
-			moderateRisk.operate();
+			results.storeNewResult(moderateRisk.operate());
 		}
 		else if((0 <= avgTraffic && avgTraffic < 4)||(0 <= avgProhibitedItems && avgProhibitedItems < 1)){
 			lowRisk = new LowRisk();
-			lowRisk.operate();
+			results.storeNewResult(lowRisk.operate());
 		}
 		highRisk = new HighRisk();
 	}
