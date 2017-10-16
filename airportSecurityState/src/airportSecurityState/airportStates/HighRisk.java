@@ -1,5 +1,7 @@
 package airportSecurityState.airportStates;
 
+import airportSecurityState.util.Results;
+
 /**
 * HighRisk class.
 * Created for cs542 - Design patterns, Assignment 3.
@@ -11,6 +13,10 @@ public class HighRisk implements AirportStateI{
 	}
 
 	public void operate(){
-		System.out.println("High Risk");
+		
+	}
+
+	private void operate(int operationID){
+		
 	}
 }

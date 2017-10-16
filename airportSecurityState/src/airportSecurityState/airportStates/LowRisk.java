@@ -1,5 +1,6 @@
 package airportSecurityState.airportStates;
 
+import airportSecurityState.util.Results;
 /**
 * LowRisk class.
 * Created for cs542 - Design patterns, Assignment 3.
@@ -11,6 +12,10 @@ public class LowRisk implements AirportStateI{
 	}
 
 	public void operate(){
-		System.out.println("Low Risk");
+		
+	}
+
+	private void operate(int operationID){
+		
 	}
 }

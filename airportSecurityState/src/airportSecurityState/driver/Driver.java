@@ -4,7 +4,7 @@ package airportSecurityState.driver;
 import airportSecurityState.util.Results;
 import airportSecurityState.util.FileProcessor;
 import airportSecurityState.util.MyLogger;
-import airportSecurityState.util.AirportSecurity;
+import airportSecurityState.airportStates.AirportSecurity;
 import java.io.PrintWriter;
 import java.util.HashMap;
 

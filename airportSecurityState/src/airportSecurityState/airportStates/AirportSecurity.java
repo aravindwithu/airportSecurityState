@@ -1,10 +1,5 @@
-package airportSecurityState.util;
+package airportSecurityState.airportStates;
 
-import airportSecurityState.util.Results;
-import airportSecurityState.airportStates.AirportStateI;
-import airportSecurityState.airportStates.HighRisk;
-import airportSecurityState.airportStates.ModerateRisk;
-import airportSecurityState.airportStates.LowRisk;
 import java.util.HashMap;
 import java.util.Map;
 
