@@ -41,6 +41,7 @@ public class AirportSecurity{
 			day = Integer.parseInt(securityData.get("Day"));
 			setAvgTraffic();
 			setAvgProhibitedItems();
+			setAirportState();
 		}
 	}
 
@@ -67,12 +68,18 @@ public class AirportSecurity{
 	}
 
 	private void setAirportState(){
-		if((0 <= avgTraffic && avgTraffic < 4)|| (0 <= avgProhibitedItems && avgProhibitedItems < 1)){
+		if((avgTraffic > 8)||(avgProhibitedItems >= 2)){
+			highRisk = new HighRisk();
+			highRisk.operate();
+		}
+		else if((4 <= avgTraffic && avgTraffic >= 8)||(1 <= avgProhibitedItems && avgProhibitedItems < 2)){
+			moderateRisk = new ModerateRisk();
+			moderateRisk.operate();
+		}
+		else if((0 <= avgTraffic && avgTraffic < 4)||(0 <= avgProhibitedItems && avgProhibitedItems < 1)){
 			lowRisk = new LowRisk();
 			lowRisk.operate();
 		}
 		highRisk = new HighRisk();
-		moderateRisk = new ModerateRisk();
-		
 	}
 }

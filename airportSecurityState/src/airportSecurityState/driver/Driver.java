@@ -61,7 +61,6 @@ public class Driver
 		    		String[] tuple = lineTuple.split(":");
 		    		if(!tuple[0].equals(null) && !tuple[1].equals(null)){
 		    			securityData.put(tuple[0], tuple[1]);
-		    			
 		    		}
 		    	}
 		    	airportSecurity.tightenOrLoosenSecurity(securityData);

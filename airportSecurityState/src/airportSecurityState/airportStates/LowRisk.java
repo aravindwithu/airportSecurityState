@@ -11,6 +11,6 @@ public class LowRisk implements AirportStateI{
 	}
 
 	public void operate(){
-
+		System.out.println("Low Risk");
 	}
 }

@@ -11,6 +11,6 @@ public class ModerateRisk implements AirportStateI{
 	}
 
 	public void operate(){
-
+		System.out.println("Moderate Risk");
 	}
 }
