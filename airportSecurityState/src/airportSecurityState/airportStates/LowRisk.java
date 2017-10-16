@@ -5,6 +5,12 @@ package airportSecurityState.airportStates;
 * Created for cs542 - Design patterns, Assignment 3.
 * @author Aravind Venkit
 */
-public class LowRisk{
-	
+public class LowRisk implements AirportStateI{
+	public LowRisk(){
+		
+	}
+
+	public void operate(){
+
+	}
 }

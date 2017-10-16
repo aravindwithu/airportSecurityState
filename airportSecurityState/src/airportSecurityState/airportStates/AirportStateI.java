@@ -6,5 +6,5 @@ package airportSecurityState.airportStates;
 * @author Aravind Venkit
 */
 public interface AirportStateI{
-	public void operation(int operationID);
+	public void operate();
 }

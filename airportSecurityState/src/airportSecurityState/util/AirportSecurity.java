@@ -1,6 +1,10 @@
 package airportSecurityState.util;
 
 import airportSecurityState.util.Results;
+import airportSecurityState.airportStates.AirportStateI;
+import airportSecurityState.airportStates.HighRisk;
+import airportSecurityState.airportStates.ModerateRisk;
+import airportSecurityState.airportStates.LowRisk;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +19,9 @@ public class AirportSecurity{
 	private int avgProhibitedItems;
 	private int travellersCount;
 	private int prohibitedItemsCount;
+	private AirportStateI highRisk;
+	private AirportStateI moderateRisk;
+	private AirportStateI lowRisk;
 	private HashMap<String, String> securityData;
 
 	public AirportSecurity(){
@@ -57,5 +64,15 @@ public class AirportSecurity{
 
 	private void setAvgProhibitedItems(){
 		avgProhibitedItems = prohibitedItemsCount/day;
+	}
+
+	private void setAirportState(){
+		if((0 <= avgTraffic && avgTraffic < 4)|| (0 <= avgProhibitedItems && avgProhibitedItems < 1)){
+			lowRisk = new LowRisk();
+			lowRisk.operate();
+		}
+		highRisk = new HighRisk();
+		moderateRisk = new ModerateRisk();
+		
 	}
 }
