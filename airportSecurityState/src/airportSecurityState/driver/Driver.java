@@ -66,15 +66,7 @@ public class Driver
 		    while ((line = file.readLine(true)) != null)
 		    {
 		    	// Read line is split into array of string based on '":" charecter.
-		    	String[] lineArr = line.split(";");
-		    	HashMap<String, String> securityData = new HashMap<>();
-		    	for(String lineTuple : lineArr){
-		    		String[] tuple = lineTuple.split(":");
-		    		if(!tuple[0].equals(null) && !tuple[1].equals(null)){
-		    			securityData.put(tuple[0], tuple[1]);
-		    		}
-		    	}
-		    	airportSecurity.tightenOrLoosenSecurity(securityData);
+		    	airportSecurity.tightenOrLoosenSecurity(line);
 		    	results.storeNewResult(airportSecurity.operate());
 		    }
 		    // closes the file resader.

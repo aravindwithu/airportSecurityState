@@ -1,7 +1,4 @@
 package airportSecurityState.airportStates;
-
-import java.util.HashMap;
-import java.util.Map;
 import airportSecurityState.util.MyLogger;
 
 /**
@@ -28,9 +25,8 @@ public class AirportSecurity{
 		airportState = new LowRisk();
 	}
 
-	public void tightenOrLoosenSecurity(HashMap<String, String> securityDataIn){
-		myLogger.writeMessage("tightenOrLoosenSecurity securityData: "+securityDataIn, MyLogger.DebugLevel.INPUT_DATA);
-		airportState.tightenOrLoosenSecurity(this, securityDataIn);
+	public void tightenOrLoosenSecurity(String securityData){
+		airportState.tightenOrLoosenSecurity(this, securityData);
 	}
 
 	public String operate(){

@@ -1,8 +1,6 @@
 package airportSecurityState.airportStates;
 import airportSecurityState.util.MyLogger;
 
-import java.util.HashMap;
-import java.util.Map;
 /**
 * LowRisk class.
 * Created for cs542 - Design patterns, Assignment 3.
@@ -19,38 +17,25 @@ public class LowRisk implements AirportStateI{
 		myLogger.writeMessage("LowRisk Constructor Called.", MyLogger.DebugLevel.CONSTRUCTOR);	
 	}
 
-	public void tightenOrLoosenSecurity(AirportSecurity airportSecurityIn, HashMap<String, String> securityData){
+	public void tightenOrLoosenSecurity(AirportSecurity airportSecurityIn, String securityData){
 		airportSecurity = airportSecurityIn;
-		if (securityData.containsKey("Day")){
-			airportStateHelper = new AirportStateHelper(airportSecurity);	
-			int airportState = 
-			airportStateHelper.getAirportState( Integer.parseInt(securityData.get("Day")), securityData.get("Item"));
+		airportStateHelper = new AirportStateHelper(airportSecurity);	
+		int airportState = airportStateHelper.getAirportState(securityData);
 			switch(airportState){
-				case 0:
-					airportSecurity.setAirportState(new LowRisk());
-					break;
-				case 1:
-					airportSecurity.setAirportState(new ModerateRisk());
-					break;
-				case 2:
-					airportSecurity.setAirportState(new HighRisk());
-					break;
-			}
+			case 0:
+				airportSecurity.setAirportState(new LowRisk());
+				break;
+			case 1:
+				airportSecurity.setAirportState(new ModerateRisk());
+				break;
+			case 2:
+				airportSecurity.setAirportState(new HighRisk());
+				break;
 		}
 	}
 
 	public String operate(){
-		String result = "";
-		result += operate(1) + " ";
-		result += operate(3) + " ";
-		result += operate(5) + " ";
-		result += operate(7) + " ";
-		result += operate(9);
-		myLogger.writeMessage("LowRisk operations are: " + result, MyLogger.DebugLevel.OPERATIONS_RESULTS);
+		String result = "1 3 5 7 9";
 		return result;
-	}
-
-	private String operate(int operationID){
-		return Integer.toString(operationID);
 	}
 }

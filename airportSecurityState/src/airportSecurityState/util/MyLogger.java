@@ -13,16 +13,16 @@ public class MyLogger{
       DEBUG_VALUE=0 [No output should be printed from the applicatio to stdout. It is ok to write to the output file though" ]
     */
 
-    public static enum DebugLevel {RELEASE, RESULTS_OUTPUT, INPUT_DATA, OPERATIONS_RESULTS, CONSTRUCTOR};
+    public static enum DebugLevel {RELEASE, INPUT_DATA, STATE_CHANGE, RESULTS_OUTPUT, CONSTRUCTOR};
 
     private static DebugLevel debugLevel;
 
     public static void setDebugValue (int levelIn) {
 		switch (levelIn) {
             case 0: debugLevel = DebugLevel.RELEASE; break;
-            case 1: debugLevel = DebugLevel.RESULTS_OUTPUT; break;
-            case 2: debugLevel = DebugLevel.INPUT_DATA; break;
-	 		case 3: debugLevel = DebugLevel.OPERATIONS_RESULTS; break;
+            case 1: debugLevel = DebugLevel.INPUT_DATA; break;
+            case 2: debugLevel = DebugLevel.STATE_CHANGE; break;
+	 		case 3: debugLevel = DebugLevel.RESULTS_OUTPUT; break;
             case 4: debugLevel = DebugLevel.CONSTRUCTOR; break;
 		}
     }

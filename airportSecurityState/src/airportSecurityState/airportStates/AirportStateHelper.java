@@ -1,4 +1,7 @@
 package airportSecurityState.airportStates;
+import airportSecurityState.util.MyLogger;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
 * AirportStateHelper class.
@@ -8,16 +11,31 @@ package airportSecurityState.airportStates;
 public class AirportStateHelper{
 
 	private AirportSecurity airportSecurity;
+	private MyLogger myLogger;
 
 	public AirportStateHelper(AirportSecurity airportSecurityIn){
+		myLogger = new MyLogger();
+		myLogger.writeMessage("AirportSecurity Constructor Called.", MyLogger.DebugLevel.CONSTRUCTOR);
 		airportSecurity = airportSecurityIn;
 	}
 
-	public int getAirportState(int dayIn, String item){
+	public int getAirportState(String securityData){
+		String[] securityArr = securityData.split(";");
+    	HashMap<String, String> securityMap = new HashMap<>();
+    	for(String securityTuple : securityArr){
+    		String[] tuple = securityTuple.split(":");
+    		if(!tuple[0].equals(null) && !tuple[1].equals(null)){
+    			securityMap.put(tuple[0], tuple[1]);
+    		}
+    	}
 
 		int travellersCount = airportSecurity.getTravellersCount();
 		travellersCount++;
 		airportSecurity.setTravellersCount(travellersCount);
+		String item = "";
+		if(securityMap.containsKey("Item")){
+			item = securityMap.get("Item");
+		}
 
 		int prohibitedItemsCount = airportSecurity.getProhibitedItemsCount();
 		if(isProhibitedItemsCount(item)){
@@ -25,7 +43,11 @@ public class AirportStateHelper{
 			airportSecurity.setProhibitedItemsCount(prohibitedItemsCount);
 		}
 
-		int day = dayIn;
+		int day = 0;
+		if(securityMap.containsKey("Day")){
+			day = Integer.parseInt(securityMap.get("Day"));
+		}
+
 		airportSecurity.setDay(day);
 
 		int avgTraffic = getAvg(travellersCount, day);
@@ -56,7 +78,7 @@ public class AirportStateHelper{
 		return false;
 	}
 
-	public int getAvg(int total, int number){
+	private int getAvg(int total, int number){
 		return total/number;
 	}
 }
