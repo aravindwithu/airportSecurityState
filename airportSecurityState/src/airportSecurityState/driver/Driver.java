@@ -61,13 +61,16 @@ public class Driver
 			// The input values are read from file and stored treeBuilder object in BST format.
 			
 			results = new Results();
+			myLogger = new MyLogger();
 			AirportSecurity airportSecurity = new AirportSecurity();
 			String line;
 		    while ((line = file.readLine(true)) != null)
 		    {
 		    	// Read line is split into array of string based on '":" charecter.
 		    	airportSecurity.tightenOrLoosenSecurity(line);
-		    	results.storeNewResult(airportSecurity.operate());
+		    	String result = airportSecurity.operate();
+		    	myLogger.writeMessage(result, MyLogger.DebugLevel.RESULTS_OUTPUT);
+		    	results.storeNewResult(result);
 		    }
 		    // closes the file resader.
 		    file.readLine(false);

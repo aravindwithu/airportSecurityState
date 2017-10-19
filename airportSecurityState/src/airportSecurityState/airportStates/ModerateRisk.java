@@ -21,21 +21,24 @@ public class ModerateRisk implements AirportStateI{
 		airportSecurity = airportSecurityIn;
 		airportStateHelper = new AirportStateHelper(airportSecurity);	
 		int airportState = airportStateHelper.getAirportState(securityData);
+
 		switch(airportState){
 			case 0:
 				airportSecurity.setAirportState(new LowRisk());
+				myLogger.writeMessage("State change from Moderate Risk to Low Risk.", MyLogger.DebugLevel.STATE_CHANGE);
 				break;
 			case 1:
-				airportSecurity.setAirportState(new ModerateRisk());
+				myLogger.writeMessage("No change, State is Moderate Risk.", MyLogger.DebugLevel.STATE_CHANGE);
+				//airportSecurity.setAirportState(new ModerateRisk());
 				break;
 			case 2:
 				airportSecurity.setAirportState(new HighRisk());
+				myLogger.writeMessage("State change from Moderate Risk to High Risk.", MyLogger.DebugLevel.STATE_CHANGE);
 				break;
 		}
 	}
 
 	public String operate(){
-		String result = "2 3 5 8 9";
-		return result;
+		return "2 3 5 8 9";
 	}
 }

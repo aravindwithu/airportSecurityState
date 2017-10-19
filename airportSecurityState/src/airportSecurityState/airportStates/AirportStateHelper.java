@@ -48,6 +48,8 @@ public class AirportStateHelper{
 			day = Integer.parseInt(securityMap.get("Day"));
 		}
 
+		myLogger.writeMessage("Day: "+day+"; Item: "+item, MyLogger.DebugLevel.DATA_NEEDED);
+
 		airportSecurity.setDay(day);
 
 		int avgTraffic = getAvg(travellersCount, day);
