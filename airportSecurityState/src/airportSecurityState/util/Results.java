@@ -3,7 +3,7 @@ package airportSecurityState.util;
 //Header to import supporting classes.
 import java.io.PrintWriter;
 import java.util.ArrayList;
-
+import airportSecurityState.util.MyLogger;
 /**
 * Results class.
 * Created by Aravind Venkit for cs542 - Design patterns.
@@ -14,11 +14,14 @@ import java.util.ArrayList;
 public class Results implements FileDisplayInterface, StdoutDisplayInterface{
 	private ArrayList<String> resultArray = new ArrayList<String>();// string array to store results.
 	private PrintWriter writer;// writer object to write to file.
+	private MyLogger myLogger;
 	/**
 	* Results constructor to intialize Results class.
 	* Calls intializeArray.
 	*/
 	public Results(){
+		myLogger = new MyLogger();
+		myLogger.writeMessage("Results Constructor Called.", MyLogger.DebugLevel.CONSTRUCTOR);
 		intializeArray();
 	}
 	/**

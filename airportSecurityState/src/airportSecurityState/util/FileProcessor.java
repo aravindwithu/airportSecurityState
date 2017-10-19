@@ -3,7 +3,7 @@ package airportSecurityState.util;
 //Header to import supporting classes.
 import java.io.BufferedReader;
 import java.io.FileReader;
-
+import airportSecurityState.util.MyLogger;
 /**
 * FileProcessor class.
 * Created for cs542 - Design patterns.
@@ -13,6 +13,7 @@ import java.io.FileReader;
 public class FileProcessor{
 	private BufferedReader file; // BufferedReader object to read from file.
 	private boolean isFileOpen = false;//  to maintain whether the file is open or not state.
+	private MyLogger myLogger;
 	/**
 	* FileProcessor constructor to intialize FileProcessor class.
 	* Requires input file course to intialize the BufferedReader object.
@@ -20,6 +21,8 @@ public class FileProcessor{
 	* @param filename to open the file reader object.
 	*/
 	public FileProcessor(String filename){
+		myLogger = new MyLogger();
+		myLogger.writeMessage("FileProcessor Constructor Called.", MyLogger.DebugLevel.CONSTRUCTOR);
 		try{
 			file = new BufferedReader(new FileReader(filename));
 			isFileOpen = true;
