@@ -6,7 +6,6 @@ import airportSecurityState.util.FileProcessor;
 import airportSecurityState.util.MyLogger;
 import airportSecurityState.airportStates.AirportSecurity;
 import java.io.PrintWriter;
-import java.util.HashMap;
 
 /**
 * Driver class contains main method.
@@ -60,16 +59,22 @@ public class Driver
 			file = new FileProcessor(inputFile);
 			// The input values are read from file and stored treeBuilder object in BST format.
 			
+			// defines result object
 			results = new Results();
+			// defines myLogger object
 			myLogger = new MyLogger();
+			// intializes airportSecurity object
 			AirportSecurity airportSecurity = new AirportSecurity();
 			String line;
 		    while ((line = file.readLine(true)) != null)
 		    {
-		    	// Read line is split into array of string based on '":" charecter.
+		    	// context class - tightenOrLoosenSecurity method is called.
 		    	airportSecurity.tightenOrLoosenSecurity(line);
+		    	// context class - operate method is called.
 		    	String result = airportSecurity.operate();
+		    	// Logger for result sring returned from operate method.
 		    	myLogger.writeMessage(result, MyLogger.DebugLevel.RESULTS_OUTPUT);
+		    	//The return operation string is stored in result object
 		    	results.storeNewResult(result);
 		    }
 		    // closes the file resader.
@@ -94,6 +99,7 @@ public class Driver
 		    results = null;
 		    file = null;
 		    writer = null;
+		    myLogger = null;
 	    }
 	}
 }

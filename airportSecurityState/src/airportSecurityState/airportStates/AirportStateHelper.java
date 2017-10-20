@@ -13,13 +13,23 @@ public class AirportStateHelper{
 	private AirportSecurity airportSecurity;
 	private MyLogger myLogger;
 
+	/**
+	* AirportStateHelper constructor, gets airportSecurityIn(context class object) from state classes.
+	*/
 	public AirportStateHelper(AirportSecurity airportSecurityIn){
 		myLogger = new MyLogger();
 		myLogger.writeMessage("AirportSecurity Constructor Called.", MyLogger.DebugLevel.CONSTRUCTOR);
 		airportSecurity = airportSecurityIn;
 	}
 
+	/**
+	* Helper method to calculate different context variables.
+	* Gets securityData(line from file) processes it.
+	* Identifies the state change and returns the same in integer form back to state class
+	* state class recives the return int value and and sets the airportState(current state)
+	*/
 	public int getAirportState(String securityData){
+		// Read line is split into array of string based on '":" charecter.
 		String[] securityArr = securityData.split(";");
     	HashMap<String, String> securityMap = new HashMap<>();
     	for(String securityTuple : securityArr){
@@ -59,18 +69,21 @@ public class AirportStateHelper{
 		airportSecurity.setAvgProhibitedItems(avgProhibitedItems);
 
 		if((avgTraffic >= 8)||(avgProhibitedItems >= 2)){
-			return 2;
+			return 2; //High Risk
 		}
 		else if((4 <= avgTraffic && avgTraffic < 8)||(1 <= avgProhibitedItems && avgProhibitedItems < 2)){
-			return 1;
+			return 1; //Moderate Risk
 		}
 		else if((0 <= avgTraffic && avgTraffic < 4)||(0 <= avgProhibitedItems && avgProhibitedItems < 1)){
-			return 0;
+			return 0; //Low Risk
 		}
 
-		return -1;
+		return -1; //No state conditions satisfied Risk
 	}
 
+	/**
+	* returns true if the passed item is prohibited item else returns false.
+	*/
 	private boolean isProhibitedItemsCount(String data){
 		if(data.equals("Gun") || data.equals("NailCutter") 
 			|| data.equals("Blade") || data.equals("Knife")){
@@ -80,6 +93,9 @@ public class AirportStateHelper{
 		return false;
 	}
 
+	/**
+	* returns average of passed total(counts like travellers count or items count) and number(day count) .
+	*/
 	private int getAvg(int total, int number){
 		return total/number;
 	}

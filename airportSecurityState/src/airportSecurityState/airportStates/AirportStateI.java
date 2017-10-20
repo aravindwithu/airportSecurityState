@@ -6,6 +6,15 @@ package airportSecurityState.airportStates;
 * @author Aravind Venkit
 */
 public interface AirportStateI{
+	/**
+	* tightenOrLoosenSecurity method.
+	* Changes the airportState (currentState).
+	*/
 	public void tightenOrLoosenSecurity(AirportSecurity airportSecurityIn, String securityData);
+
+	/**
+	* Operate method.
+	* Implements the airportState operations.
+	*/
 	public String operate();
 }
