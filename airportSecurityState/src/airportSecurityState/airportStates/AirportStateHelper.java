@@ -29,12 +29,16 @@ public class AirportStateHelper{
 	* state class recives the return int value and and sets the airportState(current state)
 	*/
 	public int getAirportState(String securityData){
+		// returns int corresponding to no action if the has no data
+		if(securityData.equals("")){
+			return -1; //No state conditions satisfied
+		}
 		// Read line is split into array of string based on '":" charecter.
 		String[] securityArr = securityData.split(";");
     	HashMap<String, String> securityMap = new HashMap<>();
     	for(String securityTuple : securityArr){
     		String[] tuple = securityTuple.split(":");
-    		if(!tuple[0].equals(null) && !tuple[1].equals(null)){
+    		if(tuple != null && !tuple[0].equals(null) && !tuple[1].equals(null)){
     			securityMap.put(tuple[0], tuple[1]);
     		}
     	}
@@ -55,7 +59,17 @@ public class AirportStateHelper{
 
 		int day = 0;
 		if(securityMap.containsKey("Day")){
-			day = Integer.parseInt(securityMap.get("Day"));
+			try{
+				day = Integer.parseInt(securityMap.get("Day"));
+				if(day == 0){
+					throw new Exception("day value incorrect in line data " + securityData);
+				}
+			}
+	    	catch(Exception ex){
+	    		System.err.println("Day should be a number : "+ ex.getMessage());// prints the error message.
+	    		ex.printStackTrace();// prints stack trace.
+	    		System.exit(0);
+			}
 		}
 
 		myLogger.writeMessage("Day: "+day+"; Item: "+item, MyLogger.DebugLevel.DATA_NEEDED);
@@ -78,7 +92,7 @@ public class AirportStateHelper{
 			return 0; //Low Risk
 		}
 
-		return -1; //No state conditions satisfied Risk
+		return -1; //No state conditions satisfied
 	}
 
 	/**
